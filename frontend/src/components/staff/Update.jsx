@@ -124,6 +124,9 @@ export default function Update({ refresh, onRefresh }) {
         }));
         setInventoryData(dataWithKey);
         setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
       });
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
@@ -207,7 +210,7 @@ export default function Update({ refresh, onRefresh }) {
       // console.log(postData);
       onRefresh();
     } catch (err) {
-      // console.log(err);
+      //
     }
   };
 
@@ -259,10 +262,7 @@ export default function Update({ refresh, onRefresh }) {
         <div>
           <div>
             {selectedItems.map((item) => (
-              <Input
-                key={item.itemName}
-                label={item.itemName}
-              >
+              <Input key={item.itemName} label={item.itemName}>
                 <input
                   type="number"
                   name="quantity"

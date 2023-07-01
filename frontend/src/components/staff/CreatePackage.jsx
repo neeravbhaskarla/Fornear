@@ -75,6 +75,9 @@ export default function CreatePackage({ refresh, onRefresh }) {
         }));
         setInventoryData(dataWithKey);
         setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
       });
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
@@ -154,7 +157,7 @@ export default function CreatePackage({ refresh, onRefresh }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(postData),
-      });
+      }).catch(() => {});
       api.open({
         message: 'Success',
         description: 'Package successfully created.',

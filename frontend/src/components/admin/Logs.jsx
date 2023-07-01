@@ -20,7 +20,8 @@ export default function Logs() {
       })
       .then((data) => {
         setLogs(data);
-      });
+      })
+      .catch(() => {});
     // console.log(logs);
   }, []);
 

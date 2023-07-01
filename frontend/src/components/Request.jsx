@@ -25,6 +25,7 @@ export default function Request() {
 
   const [packageData, setPackageData] = useState(null);
   const [personalCareProducts, setPersonalCareProducts] = useState([]);
+  const [dataOffline, setDataOffline] = useState(false);
 
   // Fetch package data by id and personal care products
   useEffect(() => {
@@ -36,11 +37,17 @@ export default function Request() {
       body: JSON.stringify({ _id }),
     })
       .then((res) => res.json())
-      .then((data) => setPackageData(data));
+      .then((data) => setPackageData(data))
+      .catch(() => {
+        setDataOffline(true);
+      });
 
     fetch('/api/get_personal_care_products')
       .then((res) => res.json())
-      .then((data) => setPersonalCareProducts(data));
+      .then((data) => setPersonalCareProducts(data))
+      .catch(() => {
+        setDataOffline(true);
+      });
   }, []);
 
   const [formData, setFormData] = useState({
@@ -125,7 +132,7 @@ export default function Request() {
       // If post is successful, redirect to home page
       redirect();
     } catch (error) {
-      // console.error(error);
+      setDataOffline(true);
     }
   };
 
@@ -133,10 +140,10 @@ export default function Request() {
     <div className="flex flex-row flex-wrap justify-center items-center">
       {contextHolder}
       {/* Render the package card on the screen next to the form */}
-      {packageData !== null && (
+      {packageData !== null && !dataOffline ? (
         <Package data={packageData} showRequest={false} />
-      )}
-      {personalCareProducts.length > 0 && (
+      ) : null}
+      {personalCareProducts.length > 0 && !dataOffline ? (
         <Input label="Choose 3 Personal Care Products">
           <div className="flex flex-col flex-wrap justify-center">
             {personalCareProducts.map((product) => (
@@ -153,7 +160,7 @@ export default function Request() {
             ))}
           </div>
         </Input>
-      )}
+      ) : null}
       <form className="flex flex-col px-6 py-4">
         <Input label="Name">
           <input

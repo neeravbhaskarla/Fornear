@@ -44,7 +44,7 @@ export default function Insert({ onInsert }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      });
+      }).catch(() => {});
       onInsert();
       clearFields();
     } catch (err) {

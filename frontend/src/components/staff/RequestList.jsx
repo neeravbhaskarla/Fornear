@@ -20,7 +20,8 @@ export default function RequestList({ refresh, onRefresh }) {
   useEffect(() => {
     fetch('/api/get_requests')
       .then((res) => res.json())
-      .then((data) => setRequestData(data));
+      .then((data) => setRequestData(data))
+      .catch(() => {});
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
 
@@ -35,7 +36,8 @@ export default function RequestList({ refresh, onRefresh }) {
       body: JSON.stringify({ _id: selectedRequest.packageId }),
     })
       .then((res) => res.json())
-      .then((data) => setPackageData(data));
+      .then((data) => setPackageData(data))
+      .catch(() => {});
   }, [modalOpen, selectedRequest]);
 
   // Set data to request and render, then open modal
@@ -64,7 +66,8 @@ export default function RequestList({ refresh, onRefresh }) {
           onRefresh();
           setModalOpen(false);
         }
-      });
+      })
+      .catch(() => {});
   };
 
   const handleDeclineClicked = () => {
@@ -86,7 +89,8 @@ export default function RequestList({ refresh, onRefresh }) {
           onRefresh();
           setModalOpen(false);
         }
-      });
+      })
+      .catch(() => {});
   };
 
   const modal = (

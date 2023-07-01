@@ -26,6 +26,9 @@ export default function FullTable({ refresh, onRefresh }) {
         setInventoryData(dataWithKey);
         setViewData(dataWithKey);
         setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
       });
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);

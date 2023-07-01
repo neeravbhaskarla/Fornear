@@ -32,7 +32,8 @@ export default function PackageGenerator({ showRequest }) {
           key: index,
         }));
         setPackageData(dataWithKey);
-      });
+      })
+      .catch(() => {});
 
     fetch('/api/get_requests')
       .then((res) => res.json())
@@ -42,7 +43,8 @@ export default function PackageGenerator({ showRequest }) {
           key: index,
         }));
         setRequestData(dataWithKey);
-      });
+      })
+      .catch(() => {});
   }, []);
 
   let mergedData = null;

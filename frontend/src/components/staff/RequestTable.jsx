@@ -66,7 +66,8 @@ export default function RequestTable({ type, refresh, onRefresh }) {
         }));
         return keyAddedData;
       })
-      .then((data) => setRequestTableData(data));
+      .then((data) => setRequestTableData(data))
+      .catch(() => {});
     // eslint-disable-next-line no-sparse-arrays
   }, [, refresh, onRefresh]);
 
