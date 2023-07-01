@@ -29,7 +29,18 @@ export default function NavLink({
         {!isDropdown ? name.toUpperCase() : name}
         {dropdown !== undefined && (dropdownOpen ? ' ▲' : ' ▼')}
       </a>
+    <div onMouseLeave={() => setDropdownOpen(false)}>
+      <a
+        key={name}
+        href={link}
+        onMouseEnter={() => setDropdownOpen(true)}
+        className={className}
+      >
+        {!isDropdown ? name.toUpperCase() : name}
+        {dropdown !== undefined && (dropdownOpen ? ' ▲' : ' ▼')}
+      </a>
       {dropdown !== undefined && dropdownOpen && (
+        <div className="flex flex-col absolute flex-center bg-gray-200 w-[10rem] shadow-md z-[99]">
         <div className="flex flex-col absolute flex-center bg-gray-200 w-[10rem] shadow-md z-[99]">
           {dropdown.map((nestedDropdown) => (
             <span className="p-2 font-bold z-[99]" key={nestedDropdown.name}>
@@ -45,6 +56,7 @@ export default function NavLink({
         </div>
       )}
     </div>
+    </div>
   );
 }
 
@@ -59,5 +71,6 @@ NavLink.propTypes = {
 
 NavLink.defaultProps = {
   isDropdown: false,
+  className: 'text-link font-bold tracking-[.0625em]',
   className: 'text-link font-bold tracking-[.0625em]',
 };
