@@ -142,7 +142,7 @@ export default function Request() {
       {/* Render the package card on the screen next to the form */}
       {packageData !== null && !dataOffline ? (
         <Package data={packageData} showRequest={false} />
-      ):null}
+      ) : null}
       {personalCareProducts.length > 0 && !dataOffline ? (
         <InputLabel label="Choose 3 Personal Care Products">
           <div className="flex flex-col flex-wrap justify-center">
@@ -160,7 +160,7 @@ export default function Request() {
             ))}
           </div>
         </InputLabel>
-      ):null}
+      ) : null}
       <form className="flex flex-col px-6 py-4">
         <InputLabel label="Name">
           <Input
